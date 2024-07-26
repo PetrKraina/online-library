@@ -1,0 +1,38 @@
+{form bookForm}
+	<div>
+		<table>
+			<tr>
+				<td><label for="{$form['catalog_id']->getHtmlId()}">{$form['catalog_id']->getLabel()}</label></td>
+				<td>{$form['catalog_id']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['author']->getHtmlId()}">{$form['author']->getLabel()}</label></td>
+				<td>{$form['author']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['title']->getHtmlId()}">{$form['title']->getLabel()}</label></td>
+				<td>{$form['title']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['genre']->getHtmlId()}">{$form['genre']->getLabel()}</label></td>
+				<td>{$form['genre']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['price']->getHtmlId()}">{$form['price']->getLabel()}</label></td>
+				<td>{$form['price']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['publish_date']->getHtmlId()}">{$form['publish_date']->getLabel()}</label></td>
+				<td>{$form['publish_date']->getControl()}</td>
+			</tr>
+			<tr>
+				<td><label for="{$form['description']->getHtmlId()}">{$form['description']->getLabel()}</label></td>
+				<td>{$form['description']->getControl()->addAttributes(['class' => 'c-popup__textarea'])}</td>
+			</tr>
+		</table>
+	</div>
+	<div class="center pt-2">
+		{input send, class=>"c-button"}
+	</div>
+{/form}
+

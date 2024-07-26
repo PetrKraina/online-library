@@ -1,0 +1,35 @@
+{block content}
+
+<table class="c-books">
+	<tr>
+		<th>ID</th>
+		<th>Katalogové ID</th>
+		<th>Autor</th>
+		<th>Název</th>
+		<th>Žánr</th>
+		<th>Datum vydání</th>
+		<th>Cena</th>
+		<th></th>
+		<th></th>
+	</tr>
+
+	{foreach $books as $book}
+		<tr>
+			<td>{$book->id}</td>
+			<td>{$book->catalog_id}</td>
+			<td>{$book->author}</td>
+			<td>{$book->title}</td>
+			<td>{$book->genre}</td>
+			<td>{$book->publish_date}</td>
+			<td>{$book->price}</td>
+			<td><a href="{link Home:edit, id => $book->id}">Upravit</a></td>
+			<td><a href="{link deleteBook! id => $book->id}">Smazat</a></td>
+		</tr>
+	{/foreach}
+</table>
+
+<div class="pt-2">
+	{include '../Includes/paginator.latte'}
+</div>
+
+{/block}

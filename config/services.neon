@@ -1,0 +1,12 @@
+services:
+	- App\Services\RouterFactory::createRouter
+	- App\UI\Controls\BookForm
+	- App\UI\Controls\UploadBooksForm
+	- App\Model\Books
+
+
+search:
+	-	in: %appDir%
+		classes:
+			- *Factory
+			- *Facade

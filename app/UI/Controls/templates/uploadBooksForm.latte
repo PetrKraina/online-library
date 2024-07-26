@@ -1,0 +1,22 @@
+<div data-popup="upload-books" class="c-popup">
+	{form uploadBooksForm class=>'c-popup__form js-message'}
+
+		<span class="c-button c-popup__exit" onclick="hidePopups();">Zavřít</span>
+
+		<div>
+			{if $form['import_file']->getErrors()}
+				<div class="c-popup__error">
+					{foreach $form['import_file']->getErrors() as $error}
+						<p>{$error}</p>
+					{/foreach}
+				</div>
+			{/if}
+		</div>
+		<div class="c-popup__message">
+			<label>{$form['import_file']->getLabel()} {$form['import_file']->getControl()}</label>
+		</div>
+		<div class="center">
+			{input upload, class=>"c-button c-button--white"}
+		</div>
+	{/form}
+</div>

@@ -1,0 +1,7 @@
+includes:
+    - vendor/phpstan/phpstan-nette/extension.neon
+
+parameters:
+    paths:
+        - app
+    level: 8

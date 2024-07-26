@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width">
+	<link rel="stylesheet" type="text/css" href="{$basePath}/css/styles.css">
+	<title>Manažer knih</title>
+</head>
+
+<body>
+	<div n:foreach="$flashes as $flash" n:class="flash, $flash->type">{$flash->message}</div>
+
+	<nav class="c-menu">
+		<ul class="c-menu__list">
+			<li class="c-menu__item"><a href="{link Home:default}">Hlavní strana</a></li>
+			<li class="c-menu__item"><a href="{link Home:add}">Přidat knihu</a></li>
+			<li class="c-menu__item"><a href="#" onclick="showPopup('upload-books'); return false;">Nahrát XML</a></li>
+		</ul>
+	</nav>
+
+	{include content}
+
+	{control uploadBooksForm}
+
+	{block scripts}
+	<script>
+		function showPopup(formType) {
+			const form = document.querySelector('[data-popup='+formType+']');
+			form.style.display = "flex";
+		}
+		function hidePopups() {
+			const elements = document.querySelectorAll('[data-popup]');
+			elements.forEach( function (element) {
+				element.style.display = "none";
+			});
+		}
+	</script>
+	{/block}
+</body>
+</html>
