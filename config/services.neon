@@ -3,6 +3,7 @@ services:
 	- App\UI\Controls\BookForm
 	- App\UI\Controls\UploadBooksForm
 	- App\Model\Books
+	- App\Model\Authors
 
 
 search:

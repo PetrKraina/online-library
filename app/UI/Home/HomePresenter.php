@@ -6,40 +6,43 @@ namespace App\UI\Home;
 
 use Nette;
 use App\Model\Books;
+use App\Model\Authors;
 
-final class HomePresenter extends \App\UI\Base\BasePresenter
-{
+final class HomePresenter extends \App\UI\Base\BasePresenter {
 
-	/** @var int<1, max> $itemsPerPage */
-	public int $itemsPerPage = 10;
+    /** @var int<1, max> $itemsPerPage */
+    public int $itemsPerPage = 10;
 
-	/** @var Books */
-	private $books;
+    /** @var Books */
+    private $books;
 
-	public function __construct(Books $books) {
-		$this->books = $books;
-	}
+    /** @var Authors */
+    private $authors;
 
-	public function handleDeleteBook(int $id): void {
-		$this->books->delete($id);
-	}
+    public function __construct(Books $books, Authors $authors) {
+        $this->books = $books;
+        $this->authors = $authors;
+    }
 
-	public function renderDefault(int $page = 1): void {
+    public function handleDeleteBook(int $id): void {
+        $this->books->delete($id);
+    }
 
-		$page = max(1, $page);
+    public function renderDefault(int $page = 1): void {
 
-		$this->template->books = $this->books->getByPage($page);
-		$booksCount = $this->books->count();
+        $page = max(1, $page);
 
-		$paginator = new Nette\Utils\Paginator;
-		$paginator->setItemCount($booksCount);
-		$paginator->setItemsPerPage($this->itemsPerPage);
-		$paginator->setPage($page);
-		$this->template->paginator = $paginator;
-	}
+        $this->template->books = $this->books->getByPage($page, $this->itemsPerPage);
+        $booksCount = $this->books->count();
 
-	public function renderEdit(int $id): void {
-		$this->template->bookId = $id;
-	}
+        $paginator = new Nette\Utils\Paginator;
+        $paginator->setItemCount($booksCount);
+        $paginator->setItemsPerPage($this->itemsPerPage);
+        $paginator->setPage($page);
+        $this->template->paginator = $paginator;
+    }
 
+    public function renderEdit(int $id): void {
+        $this->template->bookId = $id;
+    }
 }

@@ -15,15 +15,15 @@
 
 	{foreach $books as $book}
 		<tr>
-			<td>{$book->id}</td>
-			<td>{$book->catalog_id}</td>
-			<td>{$book->author}</td>
-			<td>{$book->title}</td>
-			<td>{$book->genre}</td>
-			<td>{$book->publish_date}</td>
-			<td>{$book->price}</td>
-			<td><a href="{link Home:edit, id => $book->id}">Upravit</a></td>
-			<td><a href="{link deleteBook! id => $book->id}">Smazat</a></td>
+			<td>{$book[id]}</td>
+			<td>{$book[catalog_id]}</td>
+			<td>{$book[author][name]}</td>
+			<td>{$book[title]}</td>
+			<td>{$book[genre]}</td>
+			<td>{$book[publish_date]}</td>
+			<td>{$book[price]}</td>
+			<td><a href="{link Home:edit, id => $book[id]}">Upravit</a></td>
+			<td><a href="{link deleteBook! id => $book[id]}">Smazat</a></td>
 		</tr>
 	{/foreach}
 </table>
