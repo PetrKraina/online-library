@@ -6,17 +6,23 @@ use Nette\Application\UI\Control;
 use Nette\Utils\ArrayHash;
 use Nette\Application\UI\Form;
 use App\Model\Books;
+use App\Model\Authors;
 
 class BookForm extends Control {
 
 	/** @var Books */
 	private $books;
+    
+    /** @var Authors */
+    private $authors;
 
 	/** @var int|null */
     private $bookId = null;
+    
 
-	public function __construct(Books $books) {
+	public function __construct(Books $books, \App\Model\Authors $authors) {
 		$this->books = $books;
+        $this->authors = $authors;
 	}
 
 	public function render(int $bookId = null): void {
@@ -29,26 +35,28 @@ class BookForm extends Control {
 
 		$form = new Form;
 
-		$form->addText('catalog_id', 'Katalogové ID');
+		$form->addText(Books::COL_CATALOG_ID, 'Katalogové ID');
 
-		$form->addText('author', '*Author:')
-				->setRequired('Zadejte autora.');
+        $authors = $this->authors->getNames();
+        $form->addSelect(Books::COL_AUTHOR_ID, '*Author:', $authors)
+                ->setPrompt('Vyberte autora')
+                ->setRequired('Zadejte autora.');
 
-		$form->addText('title', '*Název knihy:')
+		$form->addText(Books::COL_TITLE, '*Název knihy:')
 				->setRequired('Zadejte název knihy..');
 
-		$form->addText('genre', '*Žánr:')
+		$form->addText(Books::COL_GENRE, '*Žánr:')
 				->setRequired('Zadejte žánr.');
 
-		$form->addFloat('price', '*Cena:')
+		$form->addFloat(Books::COL_PRICE, '*Cena:')
 				->setRequired('Zadejte cenu.')
 				->addRule($form::FLOAT, 'Cena musí být číslo!');
 
-		$form->addDate('publish_date', '*Datum vydání:')
+		$form->addDate(Books::COL_PUBLISH_DATE, '*Datum vydání:')
 				->setRequired('Zadejte datum vydání.')
-				->setFormat('Y-m-d');;
+				->setFormat('Y-m-d');
 
-		$form->addTextArea('description', '*Popis knihy')
+		$form->addTextArea(Books::COL_DESCRIPTION, '*Popis knihy')
 				->addRule($form::MaxLength, 'Popis je příliš dlouhý', 65534);
 
 		if ($this->bookId) {
@@ -69,7 +77,7 @@ class BookForm extends Control {
 		$books = [
 			[
 				Books::COL_CATALOG_ID => $values['catalog_id'],
-				Books::COL_AUTHOR => $values['author'],
+				Books::COL_AUTHOR_ID => $values['author'],
 				Books::COL_TITLE => $values['title'],
 				Books::COL_GENRE => $values['genre'],
 				Books::COL_PRICE => $values['price'],

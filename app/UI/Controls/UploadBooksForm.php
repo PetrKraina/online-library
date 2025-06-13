@@ -39,7 +39,7 @@ class UploadBooksForm extends Control
 
 			foreach ($booksXml->book as $bookXml) {
 				$books[] = [
-					Books::COL_AUTHOR => (string) $bookXml->author,
+					Books::COL_AUTHOR_ID => (string) $bookXml->author,
 					Books::COL_CATALOG_ID => (string) $bookXml['id'],
 					Books::COL_TITLE => (string) $bookXml->title,
 					Books::COL_GENRE => (string) $bookXml->genre,
